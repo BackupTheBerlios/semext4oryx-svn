@@ -1,0 +1,206 @@
+{
+	"title":"Semantic EPC",
+	"namespace":"http://oryx-editor.org/stencilsets/extensions/semanticepc#",
+	"description":"Semantische Erweiterung EPK zur semantischen Datenflussmodellierung. Von Johannes Boettcher.",
+	"extends":"http://b3mn.org/stencilset/epc#",
+	"stencils":[{
+		"type": "edge",
+		"id":"semanticBridge",
+		"title":"Semantic Bridge",
+		"title_de":"Semantische Brücke",
+		"description":"A Semantic Bridge mediates between two Data Objects and its Concepts.",
+		"description_de":"Eine Semantische Brücke überbrückt semantische ähnliche aber syntaktisch fremde Dataobjekte und ihre Konzepte.",
+		"groups":["Semantic Interoperability"],
+		"groups_de":["Semantische Interoperabilität"],
+		"view":"connection.relation.svg",
+		"icon":"new_relation.png",
+		"roles": [
+			"semanticBridge",
+			"all"
+		],
+		"properties": [{
+			"id":"id",
+			"type":"String",
+			"title":"Id",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":false,
+			"refToView":"",
+			"length":"30"
+		},
+		{
+			"id":"url",
+			"type":"String",
+			"title":"Url",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":false,
+			"refToView":"",
+			"length":"30"
+		},
+		{
+			"id":"version",
+			"type":"String",
+			"title":"Version",
+			"title_de":"Version",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":true,
+			"refToView":"",
+			"length":"50",
+			"wrapLines":true
+		},
+		{
+			"id":"documentation",
+			"type":"String",
+			"title":"Documentation",
+			"title_de":"Dokumentation",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":true,
+			"refToView":"",
+			"length":"30"
+		},
+		{
+			"id":"name",
+			"type":"String",
+			"title":"Name",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":true,
+			"length":"",
+			"refToView":"name"
+		},
+		{
+			"id":"source",
+			"type":"String",
+			"title":"SourceRef",
+			"title_de":"QuellRef",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":true,
+			"length":""
+		},
+		{
+			"id":"target",
+			"type":"String",
+			"title":"TargetRef",
+			"title_de":"ZielRef",
+			"value":"",
+			"description":"",
+			"readonly":false,
+			"optional":true,
+			"length":""
+		},
+		{
+			"id":"direction",
+			"type":"String",
+			"title":"Direction",
+			"title_de":"Richtung",
+			"value":"To",
+			"description":"",
+			"readonly":true,
+			"optional":false,
+			"length":""
+		}]
+	}], 
+	"properties": [{
+		"roles" : ["Diagram"],
+		"properties" : [{
+			"id":"semanticpool",
+			"type":"Complex",
+			"title":"Semantischer Pool",
+			"description":"Hier werden verwendete Ontologien und Semantische Brücken verwaltet.",
+			"readonly":false,
+			"optional":true,
+			"value":"",
+			"complexItems": [{
+				"id":"name",
+				"name":"Name",
+				"name_de":"Name",
+				"type":"String",
+				"value":"",
+				"width":100,
+				"optional":false 
+			},
+			{
+				"id":"url",
+				"name":"URL",
+				"name_de":"URL",
+				"type":"String",
+				"value":"",
+				"width":100,
+				"optional":false,
+			},
+			{
+				"id":"xml",
+				"name":"Representation",
+				"name_de":"Anzeige",
+				"type":"String",
+				"value":"",
+				"width":100,
+				"optional":true
+			},
+			{
+				"id":"description",
+				"name":"Description",
+				"name_de":"Beschreibung",
+				"type":"String",
+				"value":"keine Beschreibung vorhanden",
+				"width":200,
+				"optional":true
+			},
+			{
+				"id":"version",
+				"name":"Version",
+				"name_de":"Version",
+				"type":"String",
+				"value":"",
+				"width":50,
+				"optional":true
+			}]
+		}]
+	},
+	{
+		"roles": ["Data"],
+		"properties": [{
+			"id":"concept",
+			"type":"Url",
+			"title":"Konzept",
+			"description":"Annotiertes Konzept",
+			"readonly":false,
+			"optional":true,
+			"min":0,
+			"refToView":"onto"
+		}]
+	}],
+	"rules": {
+		"connectionRules": [{
+			"role":"semanticBridge",
+			"connects": [{
+				"from":"event",
+				"to":["InRelWithE"]
+			},
+			{
+				"from":"function",
+				"to":["InRelWithF"]
+			},
+			{
+				"from":"InRelWithE",
+				"to":["event"]
+			},
+			{
+				"from":"InRelWithF",
+				"to":["function"]
+			}]
+		}],
+		"cardinalityRules":[],
+		"containmentRules": []
+	},
+}
